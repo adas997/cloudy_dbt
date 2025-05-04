@@ -34,3 +34,7 @@ models:
     staging:
       +materialized: view
       +schema: silver_layer
+    mart:
+      +materialized: table
+      +schema: gold_layer
+      +transient: false

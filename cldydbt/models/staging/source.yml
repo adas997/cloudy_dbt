@@ -9,6 +9,8 @@ sources:
       - name: listings
         identifier: src_listings
       - name: reviews
-        identifier: src_reviews
+        identifier: src_reviews      
+      - name: supplier
+        identifier: src_supplier
 
   
