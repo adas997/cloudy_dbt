@@ -12,5 +12,7 @@ sources:
         identifier: src_reviews      
       - name: supplier
         identifier: src_supplier
+      - name: orders
+        identifier: src_orders
 
   
