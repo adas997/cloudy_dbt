@@ -1,0 +1,15 @@
+version: 2
+seeds:
+  - name: full_moon
+    description: 'This is the config table with full moon data'
+    config:
+      schema: seed_data
+      column_types:
+        full_moon_date: date
+        description: 'Contains full moon date'
+      delimiter: ','
+      persist_docs: {relation: true, columns: true}
+      alias: full_moon_data
+      tags: 'fmoon'
+      
+        
