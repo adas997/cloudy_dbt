@@ -10,8 +10,8 @@ name as listing_name,
 listing_url,
 room_type, 
 minimum_nights, 
-host_id,
-price AS price_str, 
+host_id, 
+to_number(trim(price, '$')) as PRICE_STR,
 created_at, 
 updated_at
 FROM

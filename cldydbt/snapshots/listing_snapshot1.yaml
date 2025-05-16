@@ -1,0 +1,12 @@
+snapshots:
+  - name: listing_snapshot1
+    relation: source('bronze', 'listings')
+    config:
+      database: dbt_dev
+      schema: snapshots 
+      strategy: check
+      check_cols:
+        - room_type
+        - name 
+        - minimum_nights
+      dbt_valid_to_current: "'9999-12-31'"

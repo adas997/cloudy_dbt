@@ -1,0 +1,12 @@
+snapshots:
+  - name: listing_snapshots
+    relation: source('bronze', 'listings')
+    config:
+      database: dbt_dev
+      unique_key: id 
+      strategy: timestamp
+      updated_at: updated_at
+      dbt_valid_to_current: "'9999-12-31'"     
+         # using snapshot.yml is recommended way to create 
+         #snapshot . this is valid way of creating snapshot in dbt v 1.9+
+         # versions below 1.9 uses .sql file

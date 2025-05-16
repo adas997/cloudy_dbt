@@ -1,0 +1,18 @@
+snapshots:
+  - name: reviews_snapshot
+    relation: source('bronze', 'reviews')
+    config:
+      database: dbt_dev
+      schema: snapshots 
+      strategy: check
+      check_cols:
+        - reviewer_name
+        - comments
+        - sentiment
+      hard_deletes: new_record # options are new_record, invalidate, ignore
+      dbt_valid_to_current: "'9999-12-31'"
+
+#Note, in v1.9 and higher, the hard_deletes config replaces the invalidate_hard_deletes config for 
+#better control over how to handle deleted rows from the source.
+#Use the hard_deletes config to track deleted records as new rows with the dbt_is_deleted meta 
+#field when using the hard_deletes='new_record' field.
