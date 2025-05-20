@@ -1,0 +1,16 @@
+with customer_pub
+as
+(
+    select * from {{ ref('stg_customers') }}
+)
+select 
+CUSTOMER_ID, 
+CUSTOMER_NAME, 
+CUSTOMER_ADDRESS, 
+CUSTOMER_NATION_KEY, 
+CUSTOMER_ACCOUNT_BAL,
+CUSTOMER_MKT_SEGMENT, 
+CUSTOMER_COMMENT, 
+CREATED_AT, 
+UPDATED_AT
+from customer_pub

@@ -37,7 +37,7 @@ models:
                 - 'Entire Villa'
               config:
                 where: "created_at = updated_at"
-                limit: 1000
+                limit: 1000 
 
       - name: host_id
         tests:

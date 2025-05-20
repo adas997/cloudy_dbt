@@ -1,0 +1,63 @@
+groups:
+  - name: customer_success
+    owner:
+      name: customer_success_team
+      email: abc@yahoo.com
+
+models:
+  - name: dim_customer_pub
+    group: customer_success
+    access: public
+
+  - name: dim_customer_pvt
+    group: customer_success
+    access: private
+
+  - name: dim_customer_prt
+    latest_version: 1
+    group: customer_success
+    access: protected
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: CUSTOMER_ID
+        description: "Identifier of the customers"
+        data_type: int
+        constraints:
+          - type: not_null
+      - name: CUSTOMER_NAME
+        description: "Name of the customers"
+        data_type: varchar        
+      - name: CUSTOMER_ADDRESS
+        data_type: varchar
+      - name: CUSTOMER_NATION_KEY
+        data_type: int 
+      - name: CUSTOMER_PHONE
+        data_type: varchar
+      - name: CUSTOMER_ACCOUNT_BAL
+        data_type: int
+      - name: CUSTOMER_MKT_SEGMENT
+        data_type: varchar
+      - name: CUSTOMER_COMMENT
+        data_type: varchar
+      - name: CREATED_AT
+        data_type: TIMESTAMP_LTZ
+      - name: UPDATED_AT
+        data_type: TIMESTAMP_LTZ
+
+    
+    versions:
+      - v: 1
+        config:
+          materialized: table
+          alias: dim_customer_prt
+
+      - v: 2
+        config:
+          materialized: view
+        columns:
+          - include: all
+            exclude: [CUSTOMER_PHONE]
+
+

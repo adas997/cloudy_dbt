@@ -38,13 +38,19 @@ models:
       +materialized: table
       +schema: gold_layer
       +transient: false
+      customer:
+        +materialized: table
+        +schema: gold_customer
+      finance:
+        +materialized: table
+        +schema: gold_finance 
 
 seeds:
   cldydbt:
     +enabled: true
     +tags: 'all_seed'
     +database: dbt_dev
-    +schema: seed
+    +schema: seed_data
     +persist_docs: 
       relation: true
       columns: true

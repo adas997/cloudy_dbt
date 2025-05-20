@@ -15,4 +15,7 @@ sources:
       - name: orders
         identifier: src_orders
 
+      - name: customers 
+        identifier: src_customers
+
   
