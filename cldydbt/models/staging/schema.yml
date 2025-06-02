@@ -1,8 +1,10 @@
 version: 2
 models:
   - name: stg_hosts
+    description: this table holds the host's details
     columns:
       - name: host_id
+        description: unique identifier for each hosts
         tests:
           - unique
           - not_null
@@ -24,8 +26,29 @@ models:
       - name: listing_url
         tests:
           - not_null
+      - name: price_str
+        tests:
+          - dbt_expectations.expect_column_max_to_be_between:
+              min_value: 0
+              max_value: 5000
+              config:
+                severity: warn
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
+
+          - dbt_expectations.expect_column_values_to_match_regex:
+              regex: "^\\$[0-9][0-9\\.]+$"
+
+      - name: minimum_nights
+        description: '{{ doc ("dim_listings_minimum_nights") }}'
+        tests:
+          - negative_values:
+              config:
+                store_failures: true
+                
 
       - name: room_type
+        description: the type of rooms available
         tests:
           - accepted_values:
               values:
@@ -40,10 +63,17 @@ models:
                 limit: 1000 
 
       - name: host_id
+        description: host's id referencing the host table
         tests:
           - relationships:
               field: 'host_id'
               to: ref('stg_hosts')
+              
       - name: price_str
         tests:
-          - negative_values
+          - negative_values:
+              config:
+                store_failures: true
+
+  
+

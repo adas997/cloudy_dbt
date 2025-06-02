@@ -1,5 +1,8 @@
 models:
   - name: dim_hosts
+    tests:
+      - dbt_expectations.expect_table_column_count_to_equal_other_table:
+          compare_model: ref('stg_hosts')
     config:
       materialized: table
       contract:

@@ -17,6 +17,7 @@ test-paths: ["tests"]
 seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
+asset-paths: ["assets"]
 
 clean-targets:         # directories to be removed by `dbt clean`
   - "target"
@@ -29,8 +30,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 # In this example config, we tell dbt to build all models in the example/
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
+
 models:
   cldydbt:
+    +post-hook:
+      - "GRANT SELECT ON {{ this }} TO ROLE DBTREPORTERS"
+        
     staging:
       +materialized: view
       +schema: silver_layer
@@ -54,6 +59,14 @@ seeds:
     +persist_docs: 
       relation: true
       columns: true
+
+
+
+on-run-start: "insert into DBT_DEV.LOGS.DBT_LOGS (text) values ('runstart')"
+on-run-end: "insert into DBT_DEV.LOGS.DBT_LOGS (text) values ('runend')"
+
+vars:
+  user_name: Arpan
      
 
       

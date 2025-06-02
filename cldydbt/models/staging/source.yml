@@ -8,8 +8,24 @@ sources:
         identifier: src_hosts
       - name: listings
         identifier: src_listings
+        columns:
+          - name: room_type
+            tests:
+              - dbt_expectations.expect_column_distinct_count_to_equal:
+                  value: 6
+                  config:
+                    severity: warn
+           
       - name: reviews
-        identifier: src_reviews      
+        identifier: src_reviews 
+        loaded_at_field: date 
+        freshness: 
+          warn_after:
+            period: hour
+            count: 1
+          error_after:
+            period: hour
+            count: 24    
       - name: supplier
         identifier: src_supplier
       - name: orders

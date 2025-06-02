@@ -1,6 +1,8 @@
 {{
     config (
-        materilaized='table'
+        materilaized='table',
+        pre_hook=log_pre_hook('{{this}}'),
+        post_hook=log_post_hook('{{this}}')
     )
 }}
 select 
